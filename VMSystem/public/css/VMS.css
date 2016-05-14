@@ -1,0 +1,53 @@
+.revChart{
+  position: relative;
+  height: 300px;
+}
+
+.emailText{
+  width: 100%;
+  height: 125px;
+  font-size: 14px;
+  line-height: 18px;
+  border: 1px solid #dddddd;
+  padding: 10px;
+}
+
+.box-header-button{
+  margin-right: 5px;
+}
+
+.div-height{
+  height: 250px;
+}
+
+.div-width{
+  width: 100%;
+}
+
+.div-center{
+  border-right: 1px solid #f4f4f4
+}
+.box-body-chart{
+  height: 250px;
+}
+
+.width-90{
+  width: 90%;
+}
+
+.width-70{
+  width: 70%;
+}
+
+.width-60{
+  width: 60%;
+}
+
+.width-40{
+  width: 40%;
+}
+
+
+.font-size-20{
+  font-size: 20px
+}
