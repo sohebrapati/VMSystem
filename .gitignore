@@ -1,5 +1,6 @@
 # Exclude DLL files.
 VMSystem/node_modules
+VMSystem/build
 
 # Windows image file caches
 Thumbs.db
