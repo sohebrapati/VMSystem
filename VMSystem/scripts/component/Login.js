@@ -60,7 +60,7 @@ class Login extends React.Component{
       <input type="password" className="form-control" ref="pwd"/>
       </div>
 
-      <button type="submit" onClick={this.checkLogin.bind(this)} >Submit</button>
+      <button type="submit" onClick={this.checkLogin} >Submit</button>
       </div>
 
       </form>
