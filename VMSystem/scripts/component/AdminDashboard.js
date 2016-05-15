@@ -11,16 +11,19 @@ import autobind from 'autobind-decorator';
 import Rebase from 're-base';
 var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
 
-
 @autobind
 class AdminDashboard extends React.Component{
 
   constructor(){
     super();
     this.state ={
-      staff:JSON.parse( localStorage.getItem("staff")),
-      isStaffDisplay:false
+      staff: {},
+      isStaffDisplay:false,
+      activeTab1:true,
+      activeTab2:false
     }
+
+    //JSON.parse(localStorage.getItem("staff"))
   }
 
   addStaffData(objStaff){
@@ -30,31 +33,7 @@ class AdminDashboard extends React.Component{
     alert("Data inserted...");
   }
 
-  componentWillMount(){
-    console.log("componentWillMount");
- }
-
- componentWillReceiveProps(){
-   console.log("componentWillReceiveProps");
- }
-
- // shouldComponentUpdate(){
- //   console.log("shouldComponentUpdate");
- // }
-
- componentWillUpdate(){
-   console.log("componentWillUpdate");
- }
-
- componentDidUpdate(){
-   console.log("componentDidUpdate");
- }
-
- componentWillUnmount (){
-   console.log("componentWillUnmount");
- }
   componentDidMount(){
-
     base.syncState("/staff",{
       context:this,
       state:'staff'
@@ -72,12 +51,14 @@ class AdminDashboard extends React.Component{
  }
 
   render(){
+    // var tabActive = (this.state.activeTab1? "active" : "");
+    // var tabItemActive = (this.state.ActiveCls? "active tab-pane" : "tab-pane");
+    //
+    // var v1 = this.state.ActiveCls
 
     return(
 
-
       <div className="wrapper hold-transition skin-blue sidebar-mini">
-
         <header className="main-header">
           <a href="index.html" className="logo">
             <span className="logo-mini"><b>A</b>LT</span>
@@ -391,27 +372,22 @@ class AdminDashboard extends React.Component{
                  </div>
                </div>*/}
                <div>
-                 <section className="content-header">
-                   <h1>
-                     Staff
-                   </h1>
-                 </section>
                  <section className="content">
                   <div className="row">
                     <div className="box-body">
                        <div className="nav-tabs-custom">
                         <ul className="nav nav-tabs">
-                          <li className="active"><a href="#staffList" data-toggle="tab">Staff List</a></li>
-                          <li><a href="#addStaff" data-toggle="tab">Add Staff</a></li>
+                          <li className={(this.state.activeTab1 ? "active" : "" )}><a href="#staffList" data-toggle="tab">Staff List</a></li>
+                          <li className={(this.state.activeTab2 ? "active" : "" )}><a href="#addStaff" data-toggle="tab">Add Staff</a></li>
                         </ul>
                         </div>
                       <div className="tab-content">
-                        <div className="active tab-pane" id="staffList">
+                        <div className={(this.state.activeTab1 ? "active tab-pane" : "tab-pane" )} id="staffList">
                           <div className="post">
                               <DisplayStaff staff={this.state.staff} />
                           </div>
                         </div>
-                        <div className="tab-pane" id="addStaff">
+                        <div className={(this.state.activeTab2 ? "active tab-pane" : "tab-pane" )} id="addStaff">
                           <div className="post">
                               <AddStaff staff={this.state.staff} addStaffData={this.addStaffData} />
                           </div>

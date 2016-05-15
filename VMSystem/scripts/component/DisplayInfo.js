@@ -1,6 +1,6 @@
 import React from 'react';
-import Rebase from 're-base';
-var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
+// import Rebase from 're-base';
+// var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
 import autobind from 'autobind-decorator';
 
 

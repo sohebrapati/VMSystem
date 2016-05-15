@@ -1,12 +1,11 @@
 //Thi swill be opened from DisplayVisitor.js
 import React from 'react';
-import Rebase from 're-base';
 import {History} from 'react-router';
 import reactMixin from 'react-mixin';
-import autobind from 'autobind-decorator';
 import Webcam from 'react-webcam';
-
-var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
+import autobind from 'autobind-decorator';
+//  import Rebase from 're-base';
+// var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
 
 @autobind
 class AddVisitor extends React.Component {
@@ -24,15 +23,34 @@ class AddVisitor extends React.Component {
 
   componentDidMount(){
 
-    base.syncState("/visitors",{
-      context:this,
-      state:'visitors'
-    });
+    // base.syncState("/visitors",{
+    //   context:this,
+    //   state:'visitors'
+    // });
 
   }
 
   saveVisitor(e){
     e.preventDefault();
+
+
+    var  validate = true;
+    var strError="<span style='color:red'><ul>";
+    if(this.refs.txtName.value == ""){
+      strError +="<li> Please enter Name </li>";
+          validate = false;
+    }
+    if(this.refs.cbxIdProofType.value == ""){
+      strError +="<li> Please select Proof Type </li>";
+        validate = false;
+    }
+    if(this.refs.txtIdProofNo.value == ""){
+      strError +="<li> Please enter Proof No </li>";
+        validate = false;
+    }
+    strError+="<ul> <span>";
+
+    if(validate){
     var gen = $('input[name="optionGender"]:checked');
     var frevis = $('input[name="chkbxFreqVisitor"]:checked');
     var genName="", isFreVis=false;
@@ -81,7 +99,27 @@ class AddVisitor extends React.Component {
       localStorage.setItem("visitors", JSON.stringify(this.state.visitors));
     }
 
-  }
+      this.refs.txtName.value="";
+      this.state.data_uri="";
+      this.refs.txtContactNo.value="";
+      this.refs.cbxIdProofType.value="";
+      this.refs.txtIdProofNo.value="";
+      this.refs.txtVisitorType.value="";
+      this.refs.txtVisitPurpose.value="";
+      this.refs.txtNote.value="";
+      this.refs.txtPersonToMeet.value="";
+      this.refs.txtTowerNo.value="";
+      this.refs.txtFlatNo.value="";
+      this.refs.txtVehicleType.value="";
+      this.refs.txtVehicleNo.value="";
+      this.refs.txtGateNo.value="";
+      this.refs.txtNoOfVisitors.value="";
+      $("#errorDiv").append("");
+    }
+    else{
+      $("#errorDiv").append(strError);
+    }
+}
 
   handleFile(e) {
     var self = this;
@@ -280,6 +318,9 @@ class AddVisitor extends React.Component {
                         <div className="col-sm-offset-2 col-sm-10">
                           <button type="submit" className="btn btn-danger pull-right" onClick={this.saveVisitor}>Submit</button>
                         </div>
+                      </div>
+                      <div id="errorDiv">
+
                       </div>
                     </form>
                   </div>

@@ -1,11 +1,8 @@
 //This will be opened from DisplayStaff.js
 import React from 'react';
-
 import {History} from 'react-router';
 import reactMixin from 'react-mixin';
-
 import Webcam from 'react-webcam';
-
 import autobind from 'autobind-decorator';
 //  import Rebase from 're-base';
 // var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");

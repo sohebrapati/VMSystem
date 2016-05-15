@@ -4,16 +4,54 @@ import React from 'react';
 import {History} from 'react-router';
 import reactMixin from 'react-mixin';
 import DisplayVisitor from './DisplayVisitor';
+import AddVisitor from './AddVisitor';
+import NotFound from './NotFound';
+import autobind from 'autobind-decorator';
 
+import Rebase from 're-base';
+var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
+
+@autobind
 class SecurityDashboard extends React.Component{
+
+  constructor(){
+    super();
+    this.state ={
+      visitors:{},
+      isVisitorDisplay:false
+    }
+
+    //JSON.parse(localStorage.getItem("visitors"))
+  }
+
+  addVisitorData(objVisitor){
+    var key = "visitors-"+ objVisitor.id;
+    this.state.visitors[key] = objVisitor;
+    this.setState({visitors:this.state.visitors});
+    alert("Data inserted...");
+  }
+
+  componentDidMount(){
+    base.syncState("/visitors",{
+      context:this,
+      state:'visitors'
+    });
+
+  }
+
+  displayAddVisitor(e){
+    e.preventDefault();
+   //  this.state.isStaffDisplay = true;
+   //  this.setState({
+   //     isStaff:this.state.isStaffDisplay
+   //  });
+   this.history.pushState(null,'/');
+  }
 
   render(){
     return(
 
       <div className="hold-transition skin-blue sidebar-mini">
-
-      <div className="wrapper">
-
         <header className="main-header">
           <a href="index.html" className="logo">
             <span className="logo-mini"><b>A</b>LT</span>
@@ -306,7 +344,66 @@ class SecurityDashboard extends React.Component{
         </aside>
 
         <div className="content-wrapper" id="dividdashboard">
-          <DisplayVisitor/>
+               {/*<DisplayStaff staff={this.state.staff}/>*/}
+
+               {/*<div className="col-md-9">
+                 <div className="nav-tabs-custom">
+                   <ul className="nav nav-tabs">
+                     <li  className="active"><a href="#timeline" data-toggle="tab">Staff List</a></li>
+                     <li><a href="#settings" data-toggle="tab">Add Staff</a></li>
+                   </ul>
+                   <div className="tab-content">
+
+                     <div className="tab-pane" id="timeline">
+                         <DisplayStaff staff={this.state.staff}/>
+                     </div>
+
+                     <div className="tab-pane" id="settings">
+                         <NotFound staff={this.state.staff}/>
+                     </div>
+                   </div>
+                 </div>
+               </div>*/}
+               <div>
+                 <section className="content">
+                  <div className="row">
+                    <div className="box-body">
+                       <div className="nav-tabs-custom">
+                        <ul className="nav nav-tabs">
+                          <li className="active"><a href="#visitorList" data-toggle="tab">Visitor List</a></li>
+                          <li><a href="#addVisitor" data-toggle="tab">Add Visitor</a></li>
+                        </ul>
+                        </div>
+                      <div className="tab-content">
+                        <div className="active tab-pane" id="visitorList">
+                          <div className="post">
+                              <DisplayVisitor visitors={this.state.visitors} />
+                          </div>
+                        </div>
+                        <div className="tab-pane" id="addVisitor">
+                          <div className="post">
+                              <AddVisitor visitors={this.state.visitors} addVisitorData={this.addVisitorData} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 </section>
+               </div>
+               {/*<div>
+               <section className="content-header">
+                 <h1>List of Staff</h1>
+               </section>
+                  <section className="content">
+                 <div className="box box-primary">
+                   <div className="panel panel-default">
+                     <ul className="list-group">
+                       {Object.keys(this.state.visitors).map(this.displayData)}
+                     </ul>
+                   </div>
+                 </div>
+               </section>
+             </div>*/}
         </div>
         <footer className="main-footer">
           <div className="pull-right hidden-xs">
@@ -328,7 +425,7 @@ class SecurityDashboard extends React.Component{
                   <a href="javascript::;">
                     <i className="menu-icon fa fa-birthday-cake bg-red"></i>
                     <div className="menu-info">
-                      <h4 className="control-sidebar-subheading">Langdon's Birthday</h4>
+                      <h4 className="control-sidebar-subheading">Langdon''s Birthday</h4>
                       <p>Will be 23 on April 24th</p>
                     </div>
                   </a>
@@ -476,7 +573,6 @@ class SecurityDashboard extends React.Component{
         <div className="control-sidebar-bg"></div>
       </div>
 
-      </div>
     )
   }
 
