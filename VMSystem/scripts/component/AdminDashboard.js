@@ -43,9 +43,9 @@ class AdminDashboard extends React.Component{
   render(){
 
     return(
-      <div className="hold-transition skin-blue sidebar-mini">
 
-      <div className="wrapper">
+
+      <div className="wrapper hold-transition skin-blue sidebar-mini">
 
         <header className="main-header">
           <a href="index.html" className="logo">
@@ -360,34 +360,32 @@ class AdminDashboard extends React.Component{
                  </div>
                </div>*/}
                <div>
-                     <section className="content-header">
-                       <h1>
-                         Add Visitor
-                       </h1>
-                     </section>
-                <section class="content">
-
-<div class="row">
-<div class="col-md-9">
-               <div class="nav-tabs-custom">
- <ul class="nav nav-tabs">
-   <li class="active"><a href="#staffList" data-toggle="tab">Staff List</a></li>
-   <li><a href="#addStaff" data-toggle="tab">Add Staff</a></li>
- </ul>
- <div class="tab-content">
-  <div class="active tab-pane" id="staffList">
-   <div class="post">staffList</div>
-  </div>
-
-  <div class="tab-pane" id="addStaff">
-   <div class="post">addStaff</div>
-  </div>
- </div>
-</div>
-</div>
-</div>
- </section>
- </div>
+                 <section className="content-header">
+                   <h1>
+                     Add Visitor
+                   </h1>
+                 </section>
+                 <section className="content">
+                  <div className="row">
+                    <div className="box-body">
+                       <div className="nav-tabs-custom">
+                        <ul className="nav nav-tabs">
+                          <li className="active"><a href="#staffList" data-toggle="tab">Staff List</a></li>
+                          <li><a href="#addStaff" data-toggle="tab">Add Staff</a></li>
+                        </ul>
+                        </div>
+                      <div className="tab-content">
+                        <div className="active tab-pane" id="staffList">
+                          <div className="post">staffList</div>
+                        </div>
+                        <div className="tab-pane" id="addStaff">
+                          <div className="post">addStaff</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 </section>
+               </div>
                {/*<div>
                <section className="content-header">
                  <h1>List of Staff</h1>
@@ -423,7 +421,7 @@ class AdminDashboard extends React.Component{
                   <a href="javascript::;">
                     <i className="menu-icon fa fa-birthday-cake bg-red"></i>
                     <div className="menu-info">
-                      <h4 className="control-sidebar-subheading">Langdon's Birthday</h4>
+                      <h4 className="control-sidebar-subheading">Langdon''s Birthday</h4>
                       <p>Will be 23 on April 24th</p>
                     </div>
                   </a>
@@ -571,7 +569,7 @@ class AdminDashboard extends React.Component{
         <div className="control-sidebar-bg"></div>
       </div>
 
-      </div>
+
     )
   }
 }
