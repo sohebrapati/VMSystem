@@ -4,24 +4,55 @@ import React from 'react';
 import {History} from 'react-router';
 import reactMixin from 'react-mixin';
 import DisplayStaff from './DisplayStaff';
+import AddStaff from './AddStaff';
 import NotFound from './NotFound';
-
+import autobind from 'autobind-decorator';
 
 import Rebase from 're-base';
 var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
 
 
-
+@autobind
 class AdminDashboard extends React.Component{
 
   constructor(){
     super();
     this.state ={
-      staff:{},
+      staff:JSON.parse( localStorage.getItem("staff")),
       isStaffDisplay:false
     }
   }
 
+  addStaffData(objStaff){
+    var key = "emp-"+ objStaff.id;
+    this.state.staff[key] = objStaff;
+    this.setState({staff:this.state.staff});
+    alert("Data inserted...");
+  }
+
+  componentWillMount(){
+    console.log("componentWillMount");
+ }
+
+ componentWillReceiveProps(){
+   console.log("componentWillReceiveProps");
+ }
+
+ // shouldComponentUpdate(){
+ //   console.log("shouldComponentUpdate");
+ // }
+
+ componentWillUpdate(){
+   console.log("componentWillUpdate");
+ }
+
+ componentDidUpdate(){
+   console.log("componentDidUpdate");
+ }
+
+ componentWillUnmount (){
+   console.log("componentWillUnmount");
+ }
   componentDidMount(){
 
     base.syncState("/staff",{
@@ -362,7 +393,7 @@ class AdminDashboard extends React.Component{
                <div>
                  <section className="content-header">
                    <h1>
-                     Add Visitor
+                     Staff
                    </h1>
                  </section>
                  <section className="content">
@@ -376,10 +407,14 @@ class AdminDashboard extends React.Component{
                         </div>
                       <div className="tab-content">
                         <div className="active tab-pane" id="staffList">
-                          <div className="post">staffList</div>
+                          <div className="post">
+                              <DisplayStaff staff={this.state.staff} />
+                          </div>
                         </div>
                         <div className="tab-pane" id="addStaff">
-                          <div className="post">addStaff</div>
+                          <div className="post">
+                              <AddStaff staff={this.state.staff} addStaffData={this.addStaffData} />
+                          </div>
                         </div>
                       </div>
                     </div>
