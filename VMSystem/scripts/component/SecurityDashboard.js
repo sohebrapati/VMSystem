@@ -21,9 +21,31 @@ class SecurityDashboard extends React.Component{
       isVisitorDisplay:false
     }
 
-    //JSON.parse(localStorage.getItem("visitors"))
+  // this.state.visitors = JSON.parse(localStorage.getItem("visitors"));
+  // this.setState({
+  //    visitors : this.state.visitors
+  // });
   }
 
+   
+
+
+  checkinVisitor(key, value){
+    var objVisitor = this.state.visitors[key];
+    var checkinDetails = objVisitor.checkinDetails;
+    checkinDetails.push(value);
+    this.setState({
+      visitors : this.state.visitors
+    });
+  }
+  updateVisitor(key){
+     var objVisitor = this.state.visitors[key];
+     var checkingDetails = objVisitor.checkinDetails;
+     checkingDetails[checkingDetails.length-1].outTime = (new Date()).toString();
+     this.setState({
+         visitors : this.state.visitors
+       });
+  }
   addVisitorData(objVisitor){
     var key = "visitors-"+ objVisitor.id;
     this.state.visitors[key] = objVisitor;
@@ -377,12 +399,12 @@ class SecurityDashboard extends React.Component{
                       <div className="tab-content">
                         <div className="active tab-pane" id="visitorList">
                           <div className="post">
-                              <DisplayVisitor visitors={this.state.visitors} />
+                              <DisplayVisitor visitors={this.state.visitors} updateVisitor={this.updateVisitor} checkinVisitor={this.checkinVisitor} />
                           </div>
                         </div>
                         <div className="tab-pane" id="addVisitor">
                           <div className="post">
-                              <AddVisitor visitors={this.state.visitors} addVisitorData={this.addVisitorData} />
+                              <AddVisitor visitors={this.state.visitors}  addVisitorData={this.addVisitorData} />
                           </div>
                         </div>
                       </div>

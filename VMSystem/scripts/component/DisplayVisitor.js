@@ -31,7 +31,7 @@ class DisplayVisitor extends React.Component{
     console.log(key);
     var objVisitor = this.props.visitors[key];
     console.log(objVisitor);
-    return <SingleVisitor key={key} index={key} visitor={objVisitor}  />
+    return <SingleVisitor key={key} index={key} visitor={objVisitor} checkinVisitor={this.props.checkinVisitor} updateVisitor={this.props.updateVisitor} stateVisitor={this.props.visitors}  />
   }
   render(){
     return(

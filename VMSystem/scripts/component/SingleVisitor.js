@@ -37,7 +37,24 @@ class SingleVisitor extends React.Component{
       this.setState({modalIsOpen: false});
     }
 
+    checkinVisitor(){
 
+      var value = JSON.parse(JSON.stringify(this.props.visitor.checkinDetails[0]));
+      value.inTime = (new Date()).toString();
+      value.outTime = "";
+      this.props.checkinVisitor(this.props.index, value);
+    }
+    checkOutVisitor(e){
+      e.preventDefault();
+      this.props.updateVisitor(this.props.index);
+
+      // var visitor = this.props.stateVisitor[this.props.index];
+      // var checkingDetails = visitor.checkinDetails;
+      // // var objCheckinDetail = '';
+      //
+      // checkingDetails[checkingDetails.length-1].outTime = (new Date());
+      // alert(checkingDetails[checkingDetails.length-1].outTime);
+    }
 
   render(){
 
@@ -50,67 +67,10 @@ class SingleVisitor extends React.Component{
     var labelImportant = (this.props.visitor.blacklist ? "label label-important" : "label label-success");
   //  var isBanned = (this.props.visitor.blacklist ? "Banned" : "");
 
-
+    var inOutCss = (inOut == "In" ? "pull-right circle-singleline label-success" : "pull-right circle-singleline label-important")
     var isBanned = (this.props.visitor.blacklist ? "bg-danger" : "");
 
     return(
-      // <div>
-      //     <img src={this.props.visitor.photo} height="50" width="50" />
-      //
-      //        {visitorName} | {this.props.visitor.contactNo}
-      //
-      //        T{checkingDetails.towerNo}-{checkingDetails.flatNo}
-      //             | Reason : {checkingDetails.purpose}
-      //
-      //     <label> {inOut}</label>
-      // </div>
-
-      //comment by Jignesh
-      // <li>
-      // 		{/*<img className="avatar" alt="No Image" src={this.props.visitor.photo} />
-      // 		<strong>{visitorName}</strong> <a href="#">{this.props.visitor.contactNo}</a>
-      // 		T{checkingDetails.towerNo}-{checkingDetails.flatNo}, {checkingDetails.purpose}
-      //     <strong> | Status:</strong> <span className={labelImportant}> {isBanned}</span>
-      //     <label>{inOut}</label>*/}
-      //     <img src={this.props.visitor.photo} height="50" width="50" />
-      //
-      //             {visitorName} | {this.props.visitor.contactNo}
-      //
-      //             T{checkingDetails.towerNo}-{checkingDetails.flatNo}
-      //                  | Reason : {checkingDetails.purpose}
-      //
-      //          <label> {inOut}</label>
-      // </li>
-
-      // <li className="menu-fish">
-      //   <img src={this.props.visitor.photo} alt={visitorName} className="imageCurve" />
-      //   <span>
-      //      <span className="visitorName">{visitorName}</span> | <phone> {this.props.visitor.contactNo} </phone> | {this.props.visitor.visitorType}
-      //   </span>
-      //   <p className="visContent">{checkingDetails.purpose} | T{checkingDetails.towerNo}-{checkingDetails.flatNo}</p>
-      //   Hello <phone />? 123
-      // </li>
-      // <li className="menu-fish">
-      // <img src={this.props.visitor.photo} alt={visitorName} className="imageCurve" />
-      // <div class="list-group">
-      // <a href="#" class="list-group-item active">
-      // <h4 class="list-group-item-heading">{visitorName}</h4>
-      // <p class="list-group-item-text">{this.props.visitor.visitorType}</p>
-      // </a>
-      // </div>
-      // </li>
-      // <div className='box-comment'>
-      //   <img className='media-object dp img-circle imageUser' src='public/dist/img/user5-128x128.jpg' alt='user image' />
-      //   <div className='comment-text'>
-      //     <span className="username">
-      //       Nora Havisham
-      //       <span className='text-muted pull-right'>8:03 PM Today</span>
-      //     </span>
-      //     The point of using Lorem Ipsum is that it has a more-or-less
-      //     normal distribution of letters, as opposed to using
-      //     'Content here, content here', making it look like readable English.
-      //   </div>
-      // </div>
       <div>
       <Modal isOpen={this.state.modalIsOpen}
              onAfterOpen={this.afterOpenModal}
@@ -118,18 +78,18 @@ class SingleVisitor extends React.Component{
              style={customStyles} >
        <DisplayInfo visitor={this.props.visitor}/>
       </Modal>
-    <li className="list-group-item hand-mouse"  onClick={this.openModal}>
+    <li className="list-group-item hand-mouse"  onDoubleClick={this.openModal}>
     <div className="box-comment">
       {/*}<div className="col-lg-5">*/}
         <div className="media">
           <a className="pull-left">
               <img className="media-object dp img-circle imageUser" src={this.props.visitor.photo} />
           </a>
-          <div className="pull-right circle-singleline btn-danger">OUT</div>
+          <div className={inOutCss} onClick={inOut == "In" ? this.checkinVisitor : this.checkOutVisitor}>{inOut}</div>
           <div className="media-body">
               <h3 className="media-heading">{visitorName}</h3>
               <h4 className="media-heading">{this.props.visitor.contactNo}&nbsp;&nbsp;|&nbsp;&nbsp;Tower {checkingDetails.towerNo} - {checkingDetails.flatNo}</h4>
-              <h5 className="media-heading">Reason - {checkingDetails.note}</h5>
+              <h5 className="media-heading">Reason - {checkingDetails.purpose}</h5>
           </div>
 
         {/*</div>*/}

@@ -13,7 +13,7 @@ class AddVisitor extends React.Component {
   constructor(){
      super();
      this.state={
-         visitors:{},
+        // visitors:{},
        data_uri:null,
        vistName:'',
        contNo:''
@@ -83,7 +83,7 @@ class AddVisitor extends React.Component {
           "flatNo": this.refs.txtFlatNo.value,
           "vehicleType": this.refs.txtVehicleType.value,
           "vehicleNo": this.refs.txtVehicleNo.value,
-          "inTime": (new Date()),
+          "inTime": (new Date()).toString(),
           "outTime": "",
           "gateNo":this.refs.txtGateNo.value,
           "noOfVisitors":this.refs.txtNoOfVisitors.value
@@ -92,12 +92,13 @@ class AddVisitor extends React.Component {
     }
 
     var key = "visitors-"+ objVisitor.id;
-    this.state.visitors[key] = objVisitor;
-    this.setState({visitors:this.state.visitors});
+    this.props.visitors[key] = objVisitor;
+    this.props.addVisitorData(objVisitor);
+  //  this.setState({visitors:this.state.visitors});
 
-    if(!navigator.onLine){
-      localStorage.setItem("visitors", JSON.stringify(this.state.visitors));
-    }
+    // if(!navigator.onLine){
+      localStorage.setItem("visitors", JSON.stringify(this.props.visitors));
+    // }
 
       this.refs.txtName.value="";
       this.state.data_uri="";
