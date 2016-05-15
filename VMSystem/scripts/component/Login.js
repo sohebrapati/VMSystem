@@ -21,9 +21,9 @@ class Login extends React.Component{
 
   componentDidMount(){
 
-    base.syncState("/staff",{
+    base.syncState("/authenticator",{
       context:this,
-      state:'staff'
+      state:'authenticator'
     });
 
     // base.syncState("/authenticator",{
@@ -38,15 +38,15 @@ class Login extends React.Component{
 
     var email = this.refs.email.value;
     var pwd = this.refs.pwd.value;
-    var objValid =  Object.keys(this.state.staff).filter((key)=>{
-      return( this.state.staff[key].email == email && this.state.staff[key].password == pwd)
+    var objValid =  Object.keys(this.state.authenticator).filter((key)=>{
+      return( this.state.authenticator[key].email == email && this.state.authenticator[key].password == pwd)
     });
 
     this.refs.loginForm.reset();
-    if(objValid.length == 1 && this.state.staff[objValid[0]].designation=="admin"){
+    if(objValid.length == 1 && this.state.authenticator[objValid[0]].designation=="admin"){
       this.history.pushState(null,'/admin/'+ email);
     }
-   else  if(objValid.length == 1 && this.state.staff[objValid[0]].designation.toLocaleLowerCase()=="secuirity"){
+   else  if(objValid.length == 1 && this.state.authenticator[objValid[0]].designation.toLocaleLowerCase()=="secuirity"){
       this.history.pushState(null,'/security/'+ email);
     }
     else{

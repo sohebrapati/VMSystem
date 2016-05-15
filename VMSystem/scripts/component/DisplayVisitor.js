@@ -1,7 +1,6 @@
 import React from 'react';
-import Rebase from 're-base';
-var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
-
+// import Rebase from 're-base';
+// var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
 import SingleVisitor from './SingleVisitor';
 
 import autobind from 'autobind-decorator';
@@ -9,28 +8,28 @@ import autobind from 'autobind-decorator';
 @autobind
 class DisplayVisitor extends React.Component{
 
-  constructor(){
-    super();
-    this.state ={
-      visitors:{},
-      staff:{},
-      isStaff:false
-    }
-  }
-
-  componentDidMount(){
-
-    base.syncState("/visitors",{
-      context:this,
-      state:'visitors'
-    });
-
-  }
+  // constructor(){
+  //   super();
+  //   this.state ={
+  //     visitors:{},
+  //     staff:{},
+  //     isStaff:false
+  //   }
+  // }
+  //
+  // componentDidMount(){
+  //
+  //   base.syncState("/visitors",{
+  //     context:this,
+  //     state:'visitors'
+  //   });
+  //
+  // }
 
 
   displayData(key){
     console.log(key);
-    var objVisitor = this.state.visitors[key];
+    var objVisitor = this.props.visitors[key];
     console.log(objVisitor);
     return <SingleVisitor key={key} index={key} visitor={objVisitor}  />
   }
@@ -61,14 +60,11 @@ class DisplayVisitor extends React.Component{
 			// 	</div>
 
       <div>
-        <section className="content-header">
-          <h1>List of Visitors</h1>
-        </section>
         <section className="content">
           <div className="box box-primary">
             <div className="panel panel-default">
               <ul className="list-group">
-                {Object.keys(this.state.visitors).map(this.displayData)}
+                {Object.keys(this.props.visitors).map(this.displayData)}
               </ul>
             </div>
           </div>
