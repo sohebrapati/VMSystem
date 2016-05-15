@@ -12,7 +12,7 @@ class Report extends React.Component{
       visitors:{},
       staff:{},
       isStaff:false,
-      reportDisplay:null
+      reportDisplay:''
     }
   }
 
@@ -23,7 +23,14 @@ class Report extends React.Component{
       state:'visitors'
     });
   }
-
+  clearReport(){
+    this.refs.txtTowerNo.value = "";
+    this.refs.chkIsFrequent.checked = false;
+    this.refs.txtVehicleNo.value = "";
+    this.refs.txtVisitorType.value = "";
+    this.refs.txtDateRange.value = "";
+    $('#reportDiv').hide();
+  }
   GetReport(e) {
     e.preventDefault();
     var startDate = this.refs.txtDateRange.value;
@@ -33,11 +40,13 @@ class Report extends React.Component{
       startDate =  startDate.split('-')[0].trim();
       startDate = (new Date(startDate));
       endDate = (new Date(endDate));
+      endDate.setDate(endDate.getDate() + 1);
       var isDateRange=true;
     }
     var towerNo = this.refs.txtTowerNo.value.trim();
     var isFrequent = this.refs.chkIsFrequent.checked;
-    var vehicleNo = this.refs.txtVehicleNo.value.trim();
+    var vehicleNo = this.refs.txtVehicleNo.value.trim().toLowerCase();
+    var visType =  this.refs.txtVisitorType.value.trim().toLowerCase();
 
     var visitorsDetails = this.state.visitors;
     var objVisitors =  Object.keys(this.state.visitors).filter((key)=>{
@@ -45,79 +54,125 @@ class Report extends React.Component{
       var i = 0;
       var singelVisitor = visitorsDetails[key];
       var checkinDetails = singelVisitor.checkinDetails;
+      var tempCheckin = [];
       var isFrequentSatisfied = true;
-      var isRangeSatisfies = false;
+      var isRangeSatisfied = false;
       var isTowerSatisfied = false;
       var isVehicleNoSatisfied = false;
+      var isVisTypeSatisfied = true;
 
       if(isFrequent && !singelVisitor.frequentVisitor){
           isFrequentSatisfied = false;
-          return(
-                null
-          )
+          return;
       }
+
       if(isFrequentSatisfied && vehicleNo != ""){
-        for(i=0; i < checkinDetails.length; i++)
+        for(i=checkinDetails.length-1; i >= 0; i--)
         {
-          if(checkinDetails[i].vehicleNo.indexOf(vehicleNo) > -1)
+          if(checkinDetails[i].vehicleNo.toLowerCase().indexOf(vehicleNo) > -1)
           {
               isVehicleNoSatisfied = true;
               break;
           }
+          tempCheckin.push(checkinDetails[i]);
+          checkinDetails.pop(i);
         }
       }
       else {
         isVehicleNoSatisfied = true;
       }
+
       if(isVehicleNoSatisfied && towerNo != ""){
-        for(i=0; i < checkinDetails.length; i++)
+        for(i=checkinDetails.length-1; i >= 0; i--)
         {
-          if(checkinDetails[i].towerNo.indexOf(towerNo) > -1)
+          if(towerNo.indexOf(checkinDetails[i].towerNo) > -1)
             {
               isTowerSatisfied = true;
               break;
             }
+            tempCheckin.push(checkinDetails[i]);
+            checkinDetails.pop(i);
         }
       }
       else {
         isTowerSatisfied = true;
       }
+
       if(isTowerSatisfied && isDateRange)
       {
-        for(i=0; i < checkinDetails.length; i++)
+        for(i=checkinDetails.length-1; i >= 0; i--)
         {
           var inDate = (new Date(checkinDetails[i].inTime));
           var outDate = (new Date(checkinDetails[i].outTime));
 
           if((inDate >= startDate && inDate <= endDate) || (outDate >= startDate && outDate <= endDate))
           {
-            isRangeSatisfies = true;
+            isRangeSatisfied = true;
             break;
           }
+          tempCheckin.push(checkinDetails[i]);
+          checkinDetails.pop(i);
         }
       }
       else {
-        isRangeSatisfies = true;
+        isRangeSatisfied = true;
       }
 
-      if(isFrequentSatisfied && isRangeSatisfies && isTowerSatisfied && isVehicleNoSatisfied)
+      if(isRangeSatisfied && visType != "" &&
+              (
+                ( (visType.toLowerCase().indexOf(singelVisitor.visitorType.toLowerCase()) == -1)&&
+                  (singelVisitor.visitorType.toLowerCase().indexOf(visType.toLowerCase()) == -1)
+                ) || singelVisitor.visitorType.trim() == ""
+              )
+          ){
+          isVisTypeSatisfied = false;
+      }
+
+      if(isFrequentSatisfied && isRangeSatisfied && isTowerSatisfied && isVehicleNoSatisfied && isVisTypeSatisfied)
       {
         return(
               key
         )
       }
+      else {
+        if(tempCheckin.length > 0)
+          singelVisitor.checkinDetails = tempCheckin;
+      }
     });
 
     console.log(objVisitors);
+    if(objVisitors.length == 0)
+      $('#reportDiv').hide();
   //  objVisitors.map((value)=> {return <ReportData key={value} />})
   var me = this;
-    $.each(objVisitors, function(value){
-      me.state.reportDisplay= <ReportData key={value} />
-      me.setState({
-        reportDisplay:me.state.reportDisplay
-      });
-    });
+  $('#reportDisplaytBody').html('');
+  me.state.reportDisplay = '';
+    $.each(objVisitors, function(index,value){
 
+      var visitorData = me.state.visitors[value];
+      var checkinDetails ="";
+      if(visitorData.checkinDetails.length > 0)
+      {
+        checkinDetails = visitorData.checkinDetails[visitorData.checkinDetails.length-1];
+      }
+      var isRestricted = (visitorData.blacklist ? "true" : "false");
+      var classDanger = (visitorData.blacklist ? "label label-danger" : "label");
+
+      var rd = "<tr><td>" + visitorData.name + (checkinDetails.noOfVisitors!="" ? "+" + checkinDetails.noOfVisitors : "") + "</td>"+
+        "<td>"+ visitorData.contactNo +"</td>"+
+        "<td>"+ (checkinDetails.personToMeet ? checkinDetails.personToMeet : "") +"</td>"+
+        "<td>"+ visitorData.visitorType +"</td>"+
+        "<td visible='"+ !isRestricted +"' ><span class='"+ classDanger +"'>Not Allowed</span></td>"+
+        "<td>T"+ (checkinDetails.towerNo ? checkinDetails.towerNo : "") + "-"+ (checkinDetails.flatNo ? checkinDetails.flatNo: "") +"</td>"+
+        "<td>"+ (checkinDetails.purpose ? checkinDetails.purpose : "") +"</td>"+
+        "<td>"+ (checkinDetails.VehicleType ? checkinDetails.VehicleType+"  " : "") + (checkinDetails.vehicleNo ? checkinDetails.vehicleNo: "") +"</td>"+
+        "<td>"+ (checkinDetails.inTime ? checkinDetails.inTime : "") +"</td>"+
+        "<td>"+ (checkinDetails.outTime ? checkinDetails.outTime : "") +"</td>"+
+        "</tr>";
+
+      $('#reportDisplaytBody').append(rd);
+      $('#reportDiv').show();
+    });
   }
 
   render(){
@@ -143,15 +198,22 @@ class Report extends React.Component{
                         <input type="text" ref="txtTowerNo"/>
                       </span>
                       <span class="input-group">
-                        <label>Is Frequent:</label>
+                        <label>Frequent:</label>
                         <input type="checkbox" ref="chkIsFrequent"/>
                       </span>
                       <span class="input-group">
                         <label>Vehicle No.:</label>
                         <input type="text" ref="txtVehicleNo"/>
                       </span>
+
+                      <span class="input-group">
+                        <label>Visitor Type: </label>
+                        <input type="text" ref="txtVisitorType"/>
+                      </span>
+
                       <span class="input-group">
                         <input type="submit" value="Get Report" ref="btnGetReport" onClick={this.GetReport}></input>
+                        <input type="submit" value="Clear" ref="btnClearReport" onClick={this.clearReport}></input>
                       </span>
 
 
@@ -164,7 +226,7 @@ class Report extends React.Component{
               <ReportData />
             </ul>
           </div>*/}
-          <div class="col-xs-12">
+          <div class="col-xs-12"  id="reportDiv" visible="false" hidden="true">
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Visitor Details</h3>
@@ -172,15 +234,28 @@ class Report extends React.Component{
                     <div class="input-group">
                       {/*<input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search"/>*/}
                       <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        {/*<button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>*/}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
-                    <tbody>
-                    {this.state.reportDisplay}
+                    <thead>
+                      <tr>
+                        <td>Visitor Name</td>
+                        <td>Contact No.</td>
+                        <td>Person To Meet</td>
+                        <td>Type</td>
+                        <td>Is Allowed</td>
+                        <td>Tower-Flat</td>
+                        <td>Purpose</td>
+                        <td>Vehicle</td>
+                        <td>In Time</td>
+                        <td>Out Time</td>
+                      </tr>
+                    </thead>
+                    <tbody id="reportDisplaytBody">
                     </tbody>
                   </table>
                 </div>
