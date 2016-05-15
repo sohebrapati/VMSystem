@@ -74,7 +74,7 @@ class Login extends React.Component{
 
       <div className="login-box">
         <div className="login-logo">
-          <a href="../../index2.html"><b>Cakewalk</b>&nbsp;vsm</a>
+          <a href="../../index2.html"><b>Cakewalk</b>&nbsp;VMS</a>
         </div>
         <div className="login-box-body">
           <p className="login-box-msg">Sign in to start your session</p>
