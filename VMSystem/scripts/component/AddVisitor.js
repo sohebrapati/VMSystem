@@ -61,7 +61,6 @@ class AddVisitor extends React.Component {
       isFreVis=true;
     }
 
-
     var objVisitor =    {
       "id":(new Date()).getTime(),
       "name": this.refs.txtName.value,

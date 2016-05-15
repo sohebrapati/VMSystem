@@ -31,7 +31,7 @@ class DisplayInfo extends React.Component{
               <div className="box-footer no-padding">
                 <ul className="nav nav-stacked">
                   <li><a><span><b>Visiting Flat:</b>&nbsp;&nbsp; Tower {checkingDetails.towerNo} - {checkingDetails.flatNo}</span></a></li>
-                  <li><a><span><b>Check In:</b>&nbsp;&nbsp; {checkingDetails.inTime}</span></a></li>
+                  <li><a><span><b>Check In:</b>&nbsp;&nbsp; {(checkingDetails.inTime ? (new Date(checkingDetails.inTime)).toLocaleString() : "")}</span></a></li>
                   <li><a><span><b>Id Proof:</b>&nbsp;&nbsp; {vis.idProofType} - {vis.idProofNo}</span></a></li>
                   <li><a><span><b>Vehicle:</b>&nbsp;&nbsp; {checkingDetails.vehicleType} - {checkingDetails.vehicleNo}</span></a></li>
                   <li><a><span><b>Gate:</b>&nbsp;&nbsp; {checkingDetails.gateNo}</span></a></li>

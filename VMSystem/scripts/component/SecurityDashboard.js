@@ -7,6 +7,7 @@ import DisplayVisitor from './DisplayVisitor';
 import AddVisitor from './AddVisitor';
 import NotFound from './NotFound';
 import autobind from 'autobind-decorator';
+import Report from './Report';
 
 import Rebase from 're-base';
 var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
@@ -54,8 +55,8 @@ class SecurityDashboard extends React.Component{
       <div className="hold-transition skin-blue sidebar-mini">
         <header className="main-header">
           <a href="index.html" className="logo">
-            <span className="logo-mini"><b>A</b>LT</span>
-            <span className="logo-lg"><b>Admin</b>LTE</span>
+            <span className="logo-mini"><b>V</b>MS</span>
+            <span className="logo-lg"><b>Cakewalk</b>VMS</span>
           </a>
           <nav className="navbar navbar-static-top" role="navigation">
             <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -312,29 +313,20 @@ class SecurityDashboard extends React.Component{
             </form>
 
             <ul className="sidebar-menu">
-              <li className="header">MAIN NAVIGATION</li>
-              <li className="active treeview">
-                <a href="#">
-                  <i className="fa fa-dashboard"></i> <span>Dashboard</span> <i className="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul className="treeview-menu">
-                  <li className="active"><a href="index.html"><i className="fa fa-circle-o"></i> Dashboard v1</a></li>
-                  <li><a href="index2.html"><i className="fa fa-circle-o"></i> Dashboard v2</a></li>
-                </ul>
-              </li>
-              <li><a href="documentation/index.html"><i className="fa fa-users"></i> <span>Staff List</span></a></li>
-              <li><a href="documentation/index.html"><i className="fa fa-users"></i> <span>Visitor List</span></a></li>
+              <li><a><i className="fa fa-tachometer "></i> <span>Dashboard</span></a></li>
+              <li><a><i className="fa fa-users"></i> <span>Staff List</span></a></li>
+              <li><a><i className="fa fa-users"></i> <span>Visitor List</span></a></li>
               <li className="treeview">
-                <a href="#">
+                <a >
                   <i className="fa fa-files-o"></i>
-                  <span>VMS Reports</span>
+                  <span>Reports</span>
                   <span className="label label-primary pull-right">4</span>
                 </a>
                 <ul className="treeview-menu">
-                  <li><a href="public/pages/layout/top-nav.html"><i className="fa fa-circle-o"></i> Date-Time Wise</a></li>
-                  <li><a href="public/pages/layout/boxed.html"><i className="fa fa-circle-o"></i> Tower-Flat Wise</a></li>
-                  <li><a href="public/pages/layout/fixed.html"><i className="fa fa-circle-o"></i> Vehicle Wise</a></li>
-                  <li><a href="public/pages/layout/collapsed-sidebar.html"><i className="fa fa-circle-o"></i> Frequent</a></li>
+                  <li><a ><i className="fa fa-circle-o"></i> Date-Time Wise</a></li>
+                  <li><a ><i className="fa fa-circle-o"></i> Tower-Flat Wise</a></li>
+                  <li><a ><i className="fa fa-circle-o"></i> Vehicle Wise</a></li>
+                  <li><a ><i className="fa fa-circle-o"></i> Frequent</a></li>
                 </ul>
               </li>
 
@@ -372,6 +364,7 @@ class SecurityDashboard extends React.Component{
                         <ul className="nav nav-tabs">
                           <li className="active"><a href="#visitorList" data-toggle="tab">Visitor List</a></li>
                           <li><a href="#addVisitor" data-toggle="tab">Add Visitor</a></li>
+                          <li><a href="#VisitorReports" data-toggle="tab">Visitor Reports</a></li>
                         </ul>
                         </div>
                       <div className="tab-content">
@@ -383,6 +376,11 @@ class SecurityDashboard extends React.Component{
                         <div className="tab-pane" id="addVisitor">
                           <div className="post">
                               <AddVisitor visitors={this.state.visitors} addVisitorData={this.addVisitorData} />
+                          </div>
+                        </div>
+                        <div className="tab-pane" id="VisitorReports">
+                          <div className="post">
+                              <Report visitors={this.state.visitors} />
                           </div>
                         </div>
                       </div>
