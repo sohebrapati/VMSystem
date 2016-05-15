@@ -54,13 +54,13 @@ class AddStaff extends React.Component{
       "name": this.refs.txtName.value,
       "photo": this.state.data_uri,
       "contactNo": this.refs.txtContactNo.value,
-      "idProof": this.refs.cbxIdProofType.value,
+      "idProofType": this.refs.cbxIdProofType.value,
       "idProofNo": this.refs.txtIdProofNo.value,
       "designation": this.refs.txtDesignation.value,
       "gender":genName,
       "department":this.refs.txtDepartment.value,
       "dateOfBirth":this.refs.txtDOB.value,
-      "dateOfJoining":this.refs.txtDOJ.value,
+      "dateOfJoin":this.refs.txtDOJ.value,
       "email":this.refs.txtEmail.value,
       "password":this.refs.txtPassword.value,
       "checkinDetails": [
@@ -134,7 +134,7 @@ class AddStaff extends React.Component{
               <div className="box box-primary">
                 <div className="box-body box-profile">
                   {/* <img className="profile-user-img img-responsive img-circle" src="../../public/dist/img/user4-128x128.jpg" alt="User profile picture"/>*/}
-                  <Webcam className="webcam-circle img-responsive img-circle"  onUserMedia={this.captureImage} ref='webcam'/>
+                  <Webcam className="webcam-circle img-responsive img-circle" ref='webcam'/>
                   <h3 className="profile-username text-center">{this.state.vistName}</h3>
                   <p className="text-muted text-center">{this.state.contNo}</p>
                   {/*  <a href="#" className="btn btn-primary btn-block"><b>Follow</b></a> */}
@@ -219,16 +219,18 @@ class AddStaff extends React.Component{
                           <input type="text" className="form-control" id="txtDepartment" ref="txtDepartment" placeholder="Department"/>
                         </div>
                       </div>
+
                       <div className="form-group">
                         <label for="inputName" className="col-sm-2 control-label">Date of Birth</label>
                         <div className="col-sm-10">
-                          <input type="text" className="form-control" id="txtDOB" ref="txtDOB" placeholder="Date of Birth"/>
+                          <input type="text" className="form-control" id="txtDOB" ref="txtDOB" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask placeholder="dd/mm/yyyy" />
                         </div>
                       </div>
+
                       <div className="form-group">
                         <label for="inputName" className="col-sm-2 control-label">Date of Join</label>
                         <div className="col-sm-10">
-                          <input type="text" className="form-control" id="txtDOJ" ref="txtDOJ" placeholder="Person To Join"/>
+                          <input type="text" className="form-control" id="txtDOJ" ref="txtDOJ" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask placeholder="dd/mm/yyyy"/>
                         </div>
                       </div>
                       <div className="form-group">
@@ -264,7 +266,7 @@ class AddStaff extends React.Component{
 
                       <div className="form-group">
                         <div className="col-sm-offset-2 col-sm-10">
-                          <button type="submit" className="btn btn-danger pull-right" onClick={this.saveVisitor}>Submit</button>
+                          <button type="submit" className="btn btn-danger pull-right" onClick={this.saveStaff}>Submit</button>
                         </div>
                       </div>
                     </form>

@@ -61,12 +61,18 @@ class DisplayVisitor extends React.Component{
 			// 	</div>
 
       <div>
-        <div className="menu">
-          <ul className="list-of-fishes">
-            {Object.keys(this.state.visitors).map(this.displayData)}
-          </ul>
-        </div>
-
+        <section className="content-header">
+          <h1>List of Visitors</h1>
+        </section>
+        <section className="content">
+          <div className="box box-primary">
+            <div className="panel panel-default">
+              <ul className="list-group">
+                {Object.keys(this.state.visitors).map(this.displayData)}
+              </ul>
+            </div>
+          </div>
+        </section>
       </div>
     )
   }
