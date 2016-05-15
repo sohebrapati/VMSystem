@@ -14,7 +14,8 @@ class Login extends React.Component{
   constructor(){
     super();
     this.state ={
-      staff:{}
+      staff:{},
+      authenticator:{}
     }
   }
 
@@ -25,9 +26,16 @@ class Login extends React.Component{
       state:'staff'
     });
 
+    // base.syncState("/authenticator",{
+    //   context:this,
+    //   state:'authenticator'
+    // });
+
   }
   checkLogin(e){
     e.preventDefault();
+
+
     var email = this.refs.email.value;
     var pwd = this.refs.pwd.value;
     var objValid =  Object.keys(this.state.staff).filter((key)=>{
@@ -39,7 +47,7 @@ class Login extends React.Component{
       this.history.pushState(null,'/admin/'+ email);
     }
    else  if(objValid.length == 1 && this.state.staff[objValid[0]].designation.toLocaleLowerCase()=="secuirity"){
-      this.history.pushState(null,'/staff/'+ email);
+      this.history.pushState(null,'/security/'+ email);
     }
     else{
       alert("Enter valid Email & password");
@@ -67,7 +75,7 @@ class Login extends React.Component{
 
       <div className="login-box">
         <div className="login-logo">
-          <a href="../../index2.html"><b>Admin</b>VMS</a>
+          <a href="../../index2.html"><b>Cakewalk</b>&nbsp;vsm</a>
         </div>
         <div className="login-box-body">
           <p className="login-box-msg">Sign in to start your session</p>
