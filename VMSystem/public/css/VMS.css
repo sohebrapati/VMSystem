@@ -86,8 +86,8 @@
 }
 
 .imageUser{
-  width: 100px;
-  height:100px;
+  width: 75px;
+  height:75px;
 }
 
 
@@ -97,4 +97,20 @@
   height: 350px;
   padding: 3px;
   border: 3px solid #d2d6de;
+}
+
+.hand-mouse{
+  cursor: pointer;
+}
+
+
+.circle-singleline {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    font-size: 30px;
+    line-height: 63px;
+    /*text-align: center;*/
+    background: #d9534f;
+    color: #fff;
 }

@@ -1,11 +1,39 @@
 import React from 'react';
 import phone from 'react-icons/lib/fa/phone';
+import autobind from 'autobind-decorator';
+import DisplayInfo from './DisplayInfo';
+import Modal from 'react-modal';
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+@autobind
 class SingleVisitor extends React.Component{
 
- onClick(){
-   alert('test');
- }
+    constructor(){
+       super();
+       this.state={
+           modalIsOpen: false
+       }
+    }
+
+    openModal() {
+      this.setState({modalIsOpen: true});
+    }
+
+    closeModal() {
+      this.setState({modalIsOpen: false});
+    }
+
+
 
   render(){
 
@@ -58,7 +86,6 @@ class SingleVisitor extends React.Component{
       //   <p className="visContent">{checkingDetails.purpose} | T{checkingDetails.towerNo}-{checkingDetails.flatNo}</p>
       //   Hello <phone />? 123
       // </li>
-
       // <li className="menu-fish">
       // <img src={this.props.visitor.photo} alt={visitorName} className="imageCurve" />
       // <div class="list-group">
@@ -68,30 +95,46 @@ class SingleVisitor extends React.Component{
       // </a>
       // </div>
       // </li>
-
-
-
-      <li className="menu-fish" onClick={this.onClick}>
-
-      <div className="row">
-
-
-    <div className="col-lg-5">
+      // <div className='box-comment'>
+      //   <img className='media-object dp img-circle imageUser' src='public/dist/img/user5-128x128.jpg' alt='user image' />
+      //   <div className='comment-text'>
+      //     <span className="username">
+      //       Nora Havisham
+      //       <span className='text-muted pull-right'>8:03 PM Today</span>
+      //     </span>
+      //     The point of using Lorem Ipsum is that it has a more-or-less
+      //     normal distribution of letters, as opposed to using
+      //     'Content here, content here', making it look like readable English.
+      //   </div>
+      // </div>
+      <div>
+      <Modal isOpen={this.state.modalIsOpen}
+             onAfterOpen={this.afterOpenModal}
+             onRequestClose={this.closeModal}
+             style={customStyles} >
+       <DisplayInfo visitor={this.props.visitor}/>
+      </Modal>
+    <li className="list-group-item hand-mouse"  onClick={this.openModal}>
+    <div className="box-comment">
+      {/*}<div className="col-lg-5">*/}
         <div className="media">
-            <a className="pull-left" href="#">
-                <img className="media-object dp img-circle imageUser" src="https://secure.gravatar.com/avatar/de9b11d0f9c0569ba917393ed5e5b3ab?s=140&r=g&d=mm" />
-            </a>
-            <div className="media-body">
-                <h4 className="media-heading">Hardik Sondagar <small> India</small></h4>
-            </div>
-        </div>
+          <a className="pull-left" href="#">
+              <img className="media-object dp img-circle imageUser" src={this.props.visitor.photo} />
+          </a>
+          <div className="pull-right circle-singleline btn-danger">OUT</div>
+          <div className="media-body">
+              <h3 className="media-heading">{visitorName}</h3>
+              <h4 className="media-heading">{this.props.visitor.contactNo}&nbsp;&nbsp;|&nbsp;&nbsp;Tower {this.props.visitor.towerNo} - {this.props.visitor.flatNo}</h4>
+              <h5 className="media-heading">Reason - {this.props.visitor.note}</h5>
+          </div>
 
+        {/*</div>*/}
+      </div>
     </div>
-
-
-
+    </li>
 </div>
-      </li>
+
+
     )
 
 

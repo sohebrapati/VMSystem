@@ -49,13 +49,13 @@ class AddVisitor extends React.Component {
       "name": this.refs.txtName.value,
       "photo": this.state.data_uri,
       "contactNo": this.refs.txtContactNo.value,
-      "idProof": this.refs.cbxIdProofType.value,
+      "idProofType": this.refs.cbxIdProofType.value,
       "idProofNo": this.refs.txtIdProofNo.value,
       "visitorType": this.refs.txtVisitorType.value,
       "gender":genName,
       "count":1,
       "blacklist":false,
-      "frequentVisitor":isFreVis,
+      "isFrequentVisitor":isFreVis,
       "checkinDetails": [
         {
           "visitPurpose": this.refs.txtVisitPurpose.value,
@@ -135,7 +135,7 @@ class AddVisitor extends React.Component {
               <div className="box box-primary">
                 <div className="box-body box-profile">
                   {/* <img className="profile-user-img img-responsive img-circle" src="../../public/dist/img/user4-128x128.jpg" alt="User profile picture"/>*/}
-                  <Webcam className="webcam-circle img-responsive img-circle"  onUserMedia={this.captureImage} ref='webcam'/>
+                  <Webcam className="webcam-circle img-responsive img-circle" ref='webcam'/>
                   <h3 className="profile-username text-center">{this.state.vistName}</h3>
                   <p className="text-muted text-center">{this.state.contNo}</p>
                   {/*  <a href="#" className="btn btn-primary btn-block"><b>Follow</b></a> */}
