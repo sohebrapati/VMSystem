@@ -30,12 +30,12 @@ class DisplayInfo extends React.Component{
               </div>
               <div className="box-footer no-padding">
                 <ul className="nav nav-stacked">
-                  <li><a href="#"><span><b>Visiting Flat:</b>&nbsp;&nbsp; Tower {checkingDetails.towerNo} - {checkingDetails.flatNo}</span></a></li>
-                  <li><a href="#"><span><b>Check In:</b>&nbsp;&nbsp; {checkingDetails.inTime}</span></a></li>
-                  <li><a href="#"><span><b>Id Proof:</b>&nbsp;&nbsp; {vis.idProofType} - {vis.idProofNo}</span></a></li>
-                  <li><a href="#"><span><b>Vehicle:</b>&nbsp;&nbsp; {checkingDetails.vehicleType} - {checkingDetails.vehicleNo}</span></a></li>
-                  <li><a href="#"><span><b>Gate:</b>&nbsp;&nbsp; {checkingDetails.gateNo}</span></a></li>
-                  <li><a href="#"><span><b>Note:</b>&nbsp;&nbsp; {checkingDetails.note}</span></a></li>
+                  <li><a><span><b>Visiting Flat:</b>&nbsp;&nbsp; Tower {checkingDetails.towerNo} - {checkingDetails.flatNo}</span></a></li>
+                  <li><a><span><b>Check In:</b>&nbsp;&nbsp; {checkingDetails.inTime}</span></a></li>
+                  <li><a><span><b>Id Proof:</b>&nbsp;&nbsp; {vis.idProofType} - {vis.idProofNo}</span></a></li>
+                  <li><a><span><b>Vehicle:</b>&nbsp;&nbsp; {checkingDetails.vehicleType} - {checkingDetails.vehicleNo}</span></a></li>
+                  <li><a><span><b>Gate:</b>&nbsp;&nbsp; {checkingDetails.gateNo}</span></a></li>
+                  <li><a><span><b>Note:</b>&nbsp;&nbsp; {checkingDetails.note}</span></a></li>
                 </ul>
               </div>
             </div>

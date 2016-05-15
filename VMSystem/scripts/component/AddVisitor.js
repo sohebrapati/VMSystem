@@ -114,10 +114,12 @@ class AddVisitor extends React.Component {
       this.refs.txtVehicleNo.value="";
       this.refs.txtGateNo.value="";
       this.refs.txtNoOfVisitors.value="";
-      $("#errorDiv").append("");
+      //$("#errorDiv").append("");
+      $("#errorDiv")[0].innerHTML="";
     }
     else{
-      $("#errorDiv").append(strError);
+      //$("#errorDiv").append(strError);
+      $("#errorDiv")[0].innerHTML=strError;
     }
 }
 
@@ -155,17 +157,6 @@ class AddVisitor extends React.Component {
   render(){
     return (
       <div>
-        <section className="content-header">
-          <h1>
-            Add Visitor
-          </h1>
-          {/*<ol className="breadcrumb">
-            <li><a href="#"><i className="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Examples</a></li>
-            <li className="active">User profile</li>
-          </ol>*/}
-        </section>
-
         <section className="content">
 
           <div className="row">
@@ -173,7 +164,7 @@ class AddVisitor extends React.Component {
               <div className="box box-primary">
                 <div className="box-body box-profile">
                   {/* <img className="profile-user-img img-responsive img-circle" src="../../public/dist/img/user4-128x128.jpg" alt="User profile picture"/>*/}
-                  <Webcam className="webcam-circle img-responsive img-circle" ref='webcam'/>
+                  <Webcam className="webcam-circle img-responsive img-circle" ref='webcam' width="450" height="350" />
                   <h3 className="profile-username text-center">{this.state.vistName}</h3>
                   <p className="text-muted text-center">{this.state.contNo}</p>
                   {/*  <a href="#" className="btn btn-primary btn-block"><b>Follow</b></a> */}
@@ -188,7 +179,7 @@ class AddVisitor extends React.Component {
               </div>
               <div className="box box-primary">
                 <div className="box-body box-profile">
-                  <img className="webcam-circle-captured img-responsive img-circle" src={this.state.data_uri} alt="Captured image display here."/>
+                  <img className="webcam-circle img-responsive img-circle" src={this.state.data_uri} alt="Captured image display here."/>
                 </div>
               </div>
             </div>
