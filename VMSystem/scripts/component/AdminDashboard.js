@@ -3,12 +3,45 @@
 import React from 'react';
 import {History} from 'react-router';
 import reactMixin from 'react-mixin';
-import AddStaff from './AddStaff';
+import DisplayStaff from './DisplayStaff';
+import NotFound from './NotFound';
+
+
+import Rebase from 're-base';
+var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
+
+
 
 class AdminDashboard extends React.Component{
 
+  constructor(){
+    super();
+    this.state ={
+      staff:{},
+      isStaffDisplay:false
+    }
+  }
+
+  componentDidMount(){
+
+    base.syncState("/staff",{
+      context:this,
+      state:'staff'
+    });
+
+  }
+
+ displayAddStaff(e){
+   e.preventDefault();
+  //  this.state.isStaffDisplay = true;
+  //  this.setState({
+  //     isStaff:this.state.isStaffDisplay
+  //  });
+  this.history.pushState(null,'/');
+ }
 
   render(){
+
     return(
       <div className="hold-transition skin-blue sidebar-mini">
 
@@ -284,7 +317,7 @@ class AdminDashboard extends React.Component{
                   <li><a href="index2.html"><i className="fa fa-circle-o"></i> Dashboard v2</a></li>
                 </ul>
               </li>
-              <li><a href="documentation/index.html"><i className="fa fa-users"></i> <span>Staff List</span></a></li>
+              <li><a href="#"  ><i className="fa fa-users"></i> <span>Staff List</span></a></li>
               <li><a href="documentation/index.html"><i className="fa fa-users"></i> <span>Visitor List</span></a></li>
               <li className="treeview">
                 <a href="#">
@@ -306,7 +339,69 @@ class AdminDashboard extends React.Component{
         </aside>
 
         <div className="content-wrapper" id="dividdashboard">
-            <AddStaff/>
+               {/*<DisplayStaff staff={this.state.staff}/>*/}
+
+               {/*<div className="col-md-9">
+                 <div className="nav-tabs-custom">
+                   <ul className="nav nav-tabs">
+                     <li  className="active"><a href="#timeline" data-toggle="tab">Staff List</a></li>
+                     <li><a href="#settings" data-toggle="tab">Add Staff</a></li>
+                   </ul>
+                   <div className="tab-content">
+
+                     <div className="tab-pane" id="timeline">
+                         <DisplayStaff staff={this.state.staff}/>
+                     </div>
+
+                     <div className="tab-pane" id="settings">
+                         <NotFound staff={this.state.staff}/>
+                     </div>
+                   </div>
+                 </div>
+               </div>*/}
+               <div>
+                     <section className="content-header">
+                       <h1>
+                         Add Visitor
+                       </h1>
+                     </section>
+                <section class="content">
+
+<div class="row">
+<div class="col-md-9">
+               <div class="nav-tabs-custom">
+ <ul class="nav nav-tabs">
+   <li class="active"><a href="#staffList" data-toggle="tab">Staff List</a></li>
+   <li><a href="#addStaff" data-toggle="tab">Add Staff</a></li>
+ </ul>
+ <div class="tab-content">
+  <div class="active tab-pane" id="staffList">
+   <div class="post">staffList</div>
+  </div>
+
+  <div class="tab-pane" id="addStaff">
+   <div class="post">addStaff</div>
+  </div>
+ </div>
+</div>
+</div>
+</div>
+ </section>
+ </div>
+               {/*<div>
+               <section className="content-header">
+                 <h1>List of Staff</h1>
+               </section>
+                  <section className="content">
+                 <div className="box box-primary">
+                   <div className="panel panel-default">
+                     <ul className="list-group">
+                       {Object.keys(this.state.visitors).map(this.displayData)}
+                     </ul>
+                   </div>
+                 </div>
+               </section>
+             </div>*/}
         </div>
         <footer className="main-footer">
           <div className="pull-right hidden-xs">
@@ -420,7 +515,7 @@ class AdminDashboard extends React.Component{
                 <div className="form-group">
                   <label className="control-sidebar-subheading">
                     Report panel usage
-                    <input type="checkbox" className="pull-right" checked/>
+                    <input type="checkbox" className="pull-right" />
                   </label>
                   <p>
                     Some information about this general settings option
@@ -430,7 +525,7 @@ class AdminDashboard extends React.Component{
                 <div className="form-group">
                   <label className="control-sidebar-subheading">
                     Allow mail redirect
-                    <input type="checkbox" className="pull-right" checked/>
+                    <input type="checkbox" className="pull-right" />
                   </label>
                   <p>
                     Other sets of options are available
@@ -440,7 +535,7 @@ class AdminDashboard extends React.Component{
                 <div className="form-group">
                   <label className="control-sidebar-subheading">
                     Expose author name in posts
-                    <input type="checkbox" className="pull-right" checked/>
+                    <input type="checkbox" className="pull-right" />
                   </label>
                   <p>
                     Allow the user to show his name in blog posts
@@ -452,7 +547,7 @@ class AdminDashboard extends React.Component{
                 <div className="form-group">
                   <label className="control-sidebar-subheading">
                     Show me as online
-                    <input type="checkbox" className="pull-right" checked/>
+                    <input type="checkbox" className="pull-right" />
                   </label>
                 </div>
 
