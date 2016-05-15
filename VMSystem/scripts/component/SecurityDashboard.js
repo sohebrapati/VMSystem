@@ -28,7 +28,7 @@ class SecurityDashboard extends React.Component{
   // });
   }
 
-   
+
 
 
   checkinVisitor(key, value){
@@ -270,7 +270,7 @@ class SecurityDashboard extends React.Component{
                 <li className="dropdown user user-menu">
                   <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                     <img src="public/dist/img/user2-160x160.jpg" className="user-image" alt="User Image"/>
-                    <span className="hidden-xs">Alexander Pierce</span>
+                    <span className="hidden-xs">Soheb Rapati</span>
                   </a>
                   <ul className="dropdown-menu">
                     <li className="user-header">

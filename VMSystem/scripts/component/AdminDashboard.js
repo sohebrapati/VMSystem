@@ -300,7 +300,7 @@ class AdminDashboard extends React.Component{
                 <li className="dropdown user user-menu">
                   <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                     <img src="public/dist/img/user2-160x160.jpg" className="user-image" alt="User Image"/>
-                    <span className="hidden-xs">Alexander Pierce</span>
+                    <span className="hidden-xs">Admin</span>
                   </a>
                   <ul className="dropdown-menu">
                     <li className="user-header">
@@ -365,29 +365,20 @@ class AdminDashboard extends React.Component{
             </form>
 
             <ul className="sidebar-menu">
-              <li className="header">MAIN NAVIGATION</li>
-              <li className="active treeview">
-                <a href="#">
-                  <i className="fa fa-dashboard"></i> <span>Dashboard</span> <i className="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul className="treeview-menu">
-                  <li className="active"><a href="index.html"><i className="fa fa-circle-o"></i> Dashboard v1</a></li>
-                  <li><a href="index2.html"><i className="fa fa-circle-o"></i> Dashboard v2</a></li>
-                </ul>
-              </li>
-              <li><a href="#"  ><i className="fa fa-users"></i> <span>Staff List</span></a></li>
-              <li><a href="documentation/index.html"><i className="fa fa-users"></i> <span>Visitor List</span></a></li>
+              <li><a><i className="fa fa-tachometer "></i> <span>Dashboard</span></a></li>
+              <li><a><i className="fa fa-users"></i> <span>Staff List</span></a></li>
+              <li><a><i className="fa fa-users"></i> <span>Visitor List</span></a></li>
               <li className="treeview">
-                <a href="#">
+                <a >
                   <i className="fa fa-files-o"></i>
-                  <span>VMS Reports</span>
+                  <span>Reports</span>
                   <span className="label label-primary pull-right">4</span>
                 </a>
                 <ul className="treeview-menu">
-                  <li><a href="public/pages/layout/top-nav.html"><i className="fa fa-circle-o"></i> Date-Time Wise</a></li>
-                  <li><a href="public/pages/layout/boxed.html"><i className="fa fa-circle-o"></i> Tower-Flat Wise</a></li>
-                  <li><a href="public/pages/layout/fixed.html"><i className="fa fa-circle-o"></i> Vehicle Wise</a></li>
-                  <li><a href="public/pages/layout/collapsed-sidebar.html"><i className="fa fa-circle-o"></i> Frequent</a></li>
+                  <li><a ><i className="fa fa-circle-o"></i> Date-Time Wise</a></li>
+                  <li><a ><i className="fa fa-circle-o"></i> Tower-Flat Wise</a></li>
+                  <li><a ><i className="fa fa-circle-o"></i> Vehicle Wise</a></li>
+                  <li><a ><i className="fa fa-circle-o"></i> Frequent</a></li>
                 </ul>
               </li>
 
