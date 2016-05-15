@@ -114,3 +114,8 @@
     background: #d9534f;
     color: #fff;
 }
+
+.display-info{
+  width: 70px !important;
+  height: 70px !important;
+}
