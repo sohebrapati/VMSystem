@@ -129,7 +129,7 @@ class SingleVisitor extends React.Component{
           <div className="media-body">
               <h3 className="media-heading">{visitorName}</h3>
               <h4 className="media-heading">{this.props.visitor.contactNo}&nbsp;&nbsp;|&nbsp;&nbsp;Tower {checkingDetails.towerNo} - {checkingDetails.flatNo}</h4>
-              <h5 className="media-heading">Reason - {this.props.visitor.note}</h5>
+              <h5 className="media-heading">Reason - {checkingDetails.note}</h5>
           </div>
 
         {/*</div>*/}
