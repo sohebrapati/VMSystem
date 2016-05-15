@@ -7,6 +7,7 @@ import DisplayStaff from './DisplayStaff';
 import AddStaff from './AddStaff';
 import NotFound from './NotFound';
 import autobind from 'autobind-decorator';
+import Catalyst from 'react-catalyst';
 
 import Rebase from 're-base';
 var base = Rebase.createClass("https://jigneshdb.firebaseio.com/");
@@ -20,10 +21,55 @@ class AdminDashboard extends React.Component{
       staff: {},
       isStaffDisplay:false,
       activeTab1:true,
-      activeTab2:false
+      activeTab2:false,
+    addStaffThis:{},
+      objStaff:{
+        "id": "",
+        "name": "",
+        "photo": "",
+        "contactNo": "",
+        "idProofType": "",
+        "idProofNo": "",
+        "designation": "",
+        "gender":"",
+        "department":"",
+        "dateOfBirth":"",
+        "dateOfJoin":"",
+        "email":"",
+        "password":"",
+        "checkinDetails": [
+          {
+            "vehicleType": "",
+            "vehicleNo": "",
+            "inTime": "",
+            "outTime": "",
+            "gateNo":"",
+          }
+        ]
+      }
     }
 
     //JSON.parse(localStorage.getItem("staff"))
+  }
+
+  getChildComp(objThis){
+   if(objThis.state.isAddStaff){
+     this.state.addStaffThis = objThis;
+     this.setState({addStaffThis:this.state.addStaffThis});
+   }
+  }
+
+  changeActiveTab(tab1,tab2,key){
+     this.state.activeTab1 = tab1;
+     this.setState({activeTab1:this.state.activeTab1});
+     this.state.activeTab2 = tab2;
+     this.setState({activeTab2:this.state.activeTab2});
+
+    //  if(key !=""){
+    //    this.state.objStaff = this.state.staff[key];
+    //    this.setState({objStaff:this.state.objStaff});
+    //  }
+
   }
 
   addStaffData(objStaff){
@@ -61,8 +107,8 @@ class AdminDashboard extends React.Component{
       <div className="wrapper hold-transition skin-blue sidebar-mini">
         <header className="main-header">
           <a href="index.html" className="logo">
-            <span className="logo-mini"><b>A</b>LT</span>
-            <span className="logo-lg"><b>Admin</b>LTE</span>
+          <span className="logo-mini"><b>V</b>MS</span>
+           <span className="logo-lg"><b>Cakewalk</b>VMS</span>
           </a>
           <nav className="navbar navbar-static-top" role="navigation">
             <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -384,12 +430,12 @@ class AdminDashboard extends React.Component{
                       <div className="tab-content">
                         <div className={(this.state.activeTab1 ? "active tab-pane" : "tab-pane" )} id="staffList">
                           <div className="post">
-                              <DisplayStaff staff={this.state.staff} />
+                              <DisplayStaff staff={this.state.staff}  objStaff={this.state.objStaff} changeActiveTab={this.changeActiveTab}/>
                           </div>
                         </div>
                         <div className={(this.state.activeTab2 ? "active tab-pane" : "tab-pane" )} id="addStaff">
                           <div className="post">
-                              <AddStaff staff={this.state.staff} addStaffData={this.addStaffData} />
+                              <AddStaff staff={this.state.staff} addStaffThis={this.state.addStaffThis} getChildComp={this.getChildComp} objStaff={this.state.objStaff} addStaffData={this.addStaffData} changeActiveTab={this.changeActiveTab} linkState={this.linkState.bind(this)}/>
                           </div>
                         </div>
                       </div>
@@ -586,4 +632,5 @@ class AdminDashboard extends React.Component{
 }
 
 reactMixin.onClass(AdminDashboard,History);
+reactMixin.onClass(AdminDashboard,Catalyst.LinkedStateMixin);
 export default AdminDashboard;

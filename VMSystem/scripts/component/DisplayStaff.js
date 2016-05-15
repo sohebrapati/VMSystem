@@ -8,14 +8,13 @@ import autobind from 'autobind-decorator';
 @autobind
 class DisplayStaff extends React.Component{
 
-  // constructor(){
-  //   super();
-  //   this.state ={
-  //     visitors:{},
-  //     staff:{},
-  //     isStaff:false
-  //   }
-  // }
+  constructor(){
+    super();
+    this.state ={
+      staff:{},
+      isStaff:false
+    }
+  }
   //
   // componentDidMount(){
   //
@@ -31,7 +30,7 @@ class DisplayStaff extends React.Component{
     console.log(key);
     var objStaff = this.props.staff[key];
     console.log(objStaff);
-    return <SingleStaff key={key} index={key} staff={objStaff}  />
+    return <SingleStaff key={key} index={key} staff={objStaff} changeActiveTab={this.props.changeActiveTab} objStaff={this.props.objStaff} />
   }
   render(){
     return(

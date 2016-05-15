@@ -16,13 +16,29 @@ class AddStaff extends React.Component{
       staff:{},
       data_uri:null,
       staffName:'',
-      contNo:''
+      contNo:'',
+      isAddStaff:true
     }
   }
   componentWillMount (){
-
+    console.log("componentWillMount");
+  //  this.props.getChildComp(this);
   }
+
+  componentDidUpdate(){
+    console.log("componentDidUpdate ");
+  //  this.props.getChildComp(this);
+  }
+
+  componentWillUnmount(){
+    console.log("componentWillUnmount ");
+  //  this.props.getChildComp(this);
+  }
+
+
+
   componentDidMount(){
+
     //  alert("mount");
 
     // base.syncState("/staff",{
@@ -101,9 +117,9 @@ class AddStaff extends React.Component{
        this.props.addStaffData(objStaff);
        //this.setState({staff:this.state.staff});
 
-       if(!navigator.onLine){
+      //  if(!navigator.onLine){
          localStorage.setItem("staff", JSON.stringify(this.props.staff));
-       }
+      //  }
       // this.refs.fromAddStaff.reset();
 
 
@@ -166,9 +182,9 @@ class AddStaff extends React.Component{
       return (
         <div>
         <section className="content-header">
-        <h1>
+        {/*<h1>
         Add Staff
-        </h1>
+        </h1>*/}
         {/*<ol className="breadcrumb">
         <li><a href="#"><i className="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Examples</a></li>
@@ -217,7 +233,7 @@ class AddStaff extends React.Component{
         <div className="form-group">
         <label for="inputName" className="col-sm-2 control-label">Name</label>
         <div className="col-sm-10">
-        <input type="text" className="form-control" id="txtName" onChange={this.setName} ref="txtName" placeholder="Name"/>
+        <input type="text" className="form-control" id="txtName"  onChange={this.setName} ref="txtName" placeholder="Name"/>
         </div>
         </div>
         <div className="form-group">
