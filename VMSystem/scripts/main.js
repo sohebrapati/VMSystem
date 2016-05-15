@@ -9,14 +9,13 @@ import AdminDashboard from './component/AdminDashboard';
 import AddStaff from './component/AddStaff';
 import Report from './component/Report';
 
-  var routes = (
-    <Router history={browserHistory}>
-      <Route path="/" component={Report}/>
-      <Route path="/admin/:email" component={AdminDashboard}/>
-      <Route path="/security/:email" component={SecurityDashboard}/>
-    </Router>
+var routes = (
+  <Router history={browserHistory}>
+    <Route path="/" component={Login}/>
+    <Route path="/admin/:email" component={AdminDashboard}/>
+    <Route path="/security/:email" component={SecurityDashboard}/>
+  </Router>
+)
 
-  )
-
-  ReactDom.render(routes,document.getElementById("main"));
-  //ReactDom.render(<Report/>,document.getElementById("main"));
+ReactDom.render(routes,document.getElementById("main"));
+//ReactDom.render(<Report/>,document.getElementById("main"));

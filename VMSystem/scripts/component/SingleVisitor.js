@@ -122,7 +122,7 @@ class SingleVisitor extends React.Component{
     <div className="box-comment">
       {/*}<div className="col-lg-5">*/}
         <div className="media">
-          <a className="pull-left" href="#">
+          <a className="pull-left">
               <img className="media-object dp img-circle imageUser" src={this.props.visitor.photo} />
           </a>
           <div className="pull-right circle-singleline btn-danger">OUT</div>
